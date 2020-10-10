@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora&family=Noto+Sans+JP&display=swap');
+
+body {
+    /* background: url("hack.png") no-repeat center center fixed; */
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        url("../images/mars.jpeg") no-repeat center center fixed;
+    background-size: cover;
+    color: #ffffff;
+}
+
+.container-fluid {
+    height: 85vh;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-heading h2 {
+    font-size: 8rem;
+    font-family: 'Lora', serif;
+}
+
+.desc {
+    font-size: 2rem;
+    font-family: 'Noto Sans JP', sans-serif;
+    font-style: italic;
+}
+
+.blink {
+    font-weight: 300;
+    font-size: 3rem;
+}
+
+.bottom-text {
+    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+.right-arrow {
+    padding-left: 10px;
+    font-size: 2rem;
+}

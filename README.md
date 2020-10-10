@@ -52,6 +52,7 @@
 
 * AWS Lex
 * AWS Athena
+* AWS Lambda
 * AWS S3 Bucket
 <!-- CONTRIBUTING -->
 
