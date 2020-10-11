@@ -1,0 +1,646 @@
+{
+    "metadata": {
+      "schemaVersion": "1.0",
+      "importType": "LEX",
+      "importFormat": "JSON"
+    },
+    "resource": {
+      "name": "MARS",
+      "version": "1",
+      "intents": [
+        {
+          "name": "venue",
+          "version": "1",
+          "fulfillmentActivity": {
+            "codeHook": {
+              "uri": "arn:aws:lambda:us-east-1:493530290838:function:serveIntent",
+              "messageVersion": "1.0"
+            },
+            "type": "CodeHook"
+          },
+          "sampleUtterances": [
+            "match between {teama} and {teamb} happened in which city",
+            "match between {teama} and {teamb} happened in which stadium",
+            "match between {teama} and {teamb} happened at venue",
+            "match on {date} venue",
+            "match on {date} stadium",
+            "where was the match",
+            "location",
+            "city",
+            "where was it played",
+            "what was the venue",
+            "in which stadium did the match happen",
+            "where was the match played on {date}",
+            "match venue for {date}"
+          ],
+          "slots": [
+            {
+              "sampleUtterances": [],
+              "slotType": "AMAZON.DATE",
+              "obfuscationSetting": "NONE",
+              "slotConstraint": "Optional",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "What was the date on that day?"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 1,
+              "name": "date"
+            },
+            {
+              "sampleUtterances": [],
+              "slotType": "teamname",
+              "slotTypeVersion": "1",
+              "obfuscationSetting": "NONE",
+              "slotConstraint": "Optional",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "First team name?"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 2,
+              "name": "teama"
+            },
+            {
+              "sampleUtterances": [],
+              "slotType": "teamname",
+              "slotTypeVersion": "1",
+              "obfuscationSetting": "NONE",
+              "slotConstraint": "Optional",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "Second team name?"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 3,
+              "name": "teamb"
+            }
+          ]
+        },
+        {
+          "name": "getTeams",
+          "version": "3",
+          "fulfillmentActivity": {
+            "codeHook": {
+              "uri": "arn:aws:lambda:us-east-1:493530290838:function:serveIntent",
+              "messageVersion": "1.0"
+            },
+            "type": "CodeHook"
+          },
+          "sampleUtterances": [
+            "match details",
+            "was there a match on {date}",
+            "what happened on {date}",
+            "which teams played on {date}",
+            "give me match details of {date}",
+            "give me the match details",
+            "match on {date}",
+            "who were playing"
+          ],
+          "slots": [
+            {
+              "sampleUtterances": [],
+              "slotType": "AMAZON.DATE",
+              "obfuscationSetting": "NONE",
+              "slotConstraint": "Optional",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "Sure, just give me the date"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 1,
+              "name": "date"
+            }
+          ]
+        },
+        {
+          "name": "winner",
+          "version": "1",
+          "fulfillmentActivity": {
+            "codeHook": {
+              "uri": "arn:aws:lambda:us-east-1:493530290838:function:serveIntent",
+              "messageVersion": "1.0"
+            },
+            "type": "CodeHook"
+          },
+          "sampleUtterances": [
+            "result of match",
+            "Who won the match between {teama} and {teamb}",
+            "Match between {teama} and {teamb} was won by",
+            "who won the match",
+            "winner",
+            "winner {date}",
+            "who won the match on {date}",
+            "who won the match between {teama} and {teamb} on {date}",
+            "result of match on {date}"
+          ],
+          "slots": [
+            {
+              "sampleUtterances": [],
+              "slotType": "AMAZON.DATE",
+              "obfuscationSetting": "NONE",
+              "slotConstraint": "Optional",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "Which date was the match on?"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 3,
+              "name": "date"
+            },
+            {
+              "sampleUtterances": [],
+              "slotType": "teamname",
+              "slotTypeVersion": "1",
+              "obfuscationSetting": "NONE",
+              "slotConstraint": "Optional",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "First team?"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 1,
+              "name": "teama"
+            },
+            {
+              "sampleUtterances": [],
+              "slotType": "teamname",
+              "slotTypeVersion": "1",
+              "obfuscationSetting": "NONE",
+              "slotConstraint": "Optional",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "Second team?"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 2,
+              "name": "teamb"
+            }
+          ]
+        },
+        {
+          "name": "POMatch",
+          "version": "1",
+          "fulfillmentActivity": {
+            "codeHook": {
+              "uri": "arn:aws:lambda:us-east-1:493530290838:function:serveIntent",
+              "messageVersion": "1.0"
+            },
+            "type": "CodeHook"
+          },
+          "sampleUtterances": [
+            "man of the match {date}",
+            "who was the man of the match on {date}",
+            "show me man of the match",
+            "who was the most impactful player",
+            "who was awared the man of the match",
+            "who was man of the match",
+            "In {teama} vs {teamb} who was the player of match",
+            "player of match"
+          ],
+          "slots": [
+            {
+              "sampleUtterances": [],
+              "slotType": "AMAZON.DATE",
+              "obfuscationSetting": "NONE",
+              "slotConstraint": "Optional",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "Which date are you looking for?"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 3,
+              "name": "date"
+            },
+            {
+              "sampleUtterances": [],
+              "slotType": "teamname",
+              "slotTypeVersion": "1",
+              "obfuscationSetting": "NONE",
+              "slotConstraint": "Optional",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "First Team?"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 1,
+              "name": "teama"
+            },
+            {
+              "sampleUtterances": [],
+              "slotType": "teamname",
+              "slotTypeVersion": "1",
+              "obfuscationSetting": "NONE",
+              "slotConstraint": "Optional",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "Second Team?"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 2,
+              "name": "teamb"
+            }
+          ]
+        },
+        {
+          "name": "winningMargin",
+          "version": "1",
+          "fulfillmentActivity": {
+            "codeHook": {
+              "uri": "arn:aws:lambda:us-east-1:493530290838:function:serveIntent",
+              "messageVersion": "1.0"
+            },
+            "type": "CodeHook"
+          },
+          "sampleUtterances": [
+            "What was the winning margin",
+            "winning margin",
+            "by how many wickets did the winner win",
+            "by how many runs did the winner win",
+            "how close was the game",
+            "what was the winning margin on {date}",
+            "{date} margin",
+            "by how much",
+            "by how many runs",
+            "by how many wickets",
+            "winning margin of the match on {date}"
+          ],
+          "slots": [
+            {
+              "sampleUtterances": [],
+              "slotType": "AMAZON.DATE",
+              "obfuscationSetting": "NONE",
+              "slotConstraint": "Optional",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "What date's match you are looking for?"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 1,
+              "name": "date"
+            }
+          ]
+        },
+        {
+          "name": "tossWinner",
+          "version": "2",
+          "fulfillmentActivity": {
+            "codeHook": {
+              "uri": "arn:aws:lambda:us-east-1:493530290838:function:serveIntent",
+              "messageVersion": "1.0"
+            },
+            "type": "CodeHook"
+          },
+          "sampleUtterances": [
+            "what was the toss decision",
+            "what was the toss decision on {date}",
+            "who won the toss on {date}",
+            "toss",
+            "toss winner",
+            "toss result",
+            "who won the toss",
+            "Which team won the toss {teama} or {teamb}",
+            "Toss between {teama} and {teamb} was won by",
+            "what was the toss result on {date}",
+            "toss outcome"
+          ],
+          "slots": [
+            {
+              "sampleUtterances": [],
+              "slotType": "AMAZON.DATE",
+              "obfuscationSetting": "NONE",
+              "slotConstraint": "Optional",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "Which date are you looking for?"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 1,
+              "name": "date"
+            },
+            {
+              "sampleUtterances": [],
+              "slotType": "teamname",
+              "slotTypeVersion": "1",
+              "obfuscationSetting": "NONE",
+              "slotConstraint": "Optional",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "First team?"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 2,
+              "name": "teama"
+            },
+            {
+              "sampleUtterances": [],
+              "slotType": "teamname",
+              "slotTypeVersion": "1",
+              "obfuscationSetting": "NONE",
+              "slotConstraint": "Optional",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "Second Team?"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 3,
+              "name": "teamb"
+            }
+          ]
+        },
+        {
+          "name": "umpireab",
+          "version": "1",
+          "fulfillmentActivity": {
+            "codeHook": {
+              "uri": "arn:aws:lambda:us-east-1:493530290838:function:serveIntent",
+              "messageVersion": "1.0"
+            },
+            "type": "CodeHook"
+          },
+          "sampleUtterances": [
+            "onfield umpire on {date}",
+            "who was the umpire on {date}",
+            "who was the onfield umpire",
+            "who was umpiring",
+            "umpire",
+            "{date} umpire",
+            "{teama} {teamb} umpire"
+          ],
+          "slots": [
+            {
+              "sampleUtterances": [],
+              "slotType": "AMAZON.DATE",
+              "obfuscationSetting": "NONE",
+              "slotConstraint": "Optional",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "Which date again?"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 1,
+              "name": "date"
+            },
+            {
+              "sampleUtterances": [],
+              "slotType": "teamname",
+              "slotTypeVersion": "1",
+              "obfuscationSetting": "NONE",
+              "slotConstraint": "Optional",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "First team?"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 2,
+              "name": "teama"
+            },
+            {
+              "sampleUtterances": [],
+              "slotType": "teamname",
+              "slotTypeVersion": "1",
+              "obfuscationSetting": "NONE",
+              "slotConstraint": "Optional",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "Second team?"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 3,
+              "name": "teamb"
+            }
+          ]
+        },
+        {
+          "name": "Greetings",
+          "version": "4",
+          "fulfillmentActivity": {
+            "type": "ReturnIntent"
+          },
+          "sampleUtterances": [
+            "Hello",
+            "Hi",
+            "Hi my name is {name} what is your name",
+            "Hi what is your name",
+            "Hey",
+            "What's up"
+          ],
+          "slots": [
+            {
+              "sampleUtterances": [],
+              "slotType": "AMAZON.DE_FIRST_NAME",
+              "obfuscationSetting": "NONE",
+              "slotConstraint": "Optional",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "What's your name?"
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 1,
+              "name": "name"
+            }
+          ],
+          "conclusionStatement": {
+            "messages": [
+              {
+                "groupNumber": 1,
+                "contentType": "PlainText",
+                "content": "Hey there. My name is MARS and I can serve you with some great stats about all the IPL matches ever played. Come relive some epic matches."
+              },
+              {
+                "groupNumber": 1,
+                "contentType": "PlainText",
+                "content": "Oh hi there. I am MARS but I live on Earth"
+              },
+              {
+                "groupNumber": 1,
+                "contentType": "PlainText",
+                "content": "So good to see you"
+              }
+            ]
+          }
+        },
+        {
+          "name": "switchIntent",
+          "version": "2",
+          "fulfillmentActivity": {
+            "codeHook": {
+              "uri": "arn:aws:lambda:us-east-1:493530290838:function:serveIntent",
+              "messageVersion": "1.0"
+            },
+            "type": "CodeHook"
+          },
+          "sampleUtterances": [
+            "Check for some other match",
+            "Another match",
+            "Okay but what about {date}",
+            "What about on {date}",
+            "Give me details of some other match",
+            "what about the match on {date}",
+            "now tell me about {date}",
+            "give me info about {date}",
+            "look for some other match"
+          ],
+          "slots": [
+            {
+              "sampleUtterances": [],
+              "slotType": "AMAZON.DATE",
+              "obfuscationSetting": "NONE",
+              "slotConstraint": "Required",
+              "valueElicitationPrompt": {
+                "messages": [
+                  {
+                    "contentType": "PlainText",
+                    "content": "Sure, just give me the date..."
+                  }
+                ],
+                "maxAttempts": 2
+              },
+              "priority": 1,
+              "name": "date"
+            }
+          ]
+        }
+      ],
+      "slotTypes": [
+        {
+          "name": "teamname",
+          "version": "1",
+          "enumerationValues": [
+            {
+              "value": "Gujarat Lions"
+            },
+            {
+              "value": "Mumbai Indians"
+            },
+            {
+              "value": "King XI Punjab"
+            },
+            {
+              "value": "Sunrisers Hyderabad"
+            },
+            {
+              "value": "Delhi Capitals"
+            },
+            {
+              "value": "Delhi Daredavils"
+            },
+            {
+              "value": "Deccan Chargers"
+            },
+            {
+              "value": "Rajasthan Royals"
+            },
+            {
+              "value": "Rising Pune Supergiants"
+            },
+            {
+              "value": "Royal Challengers Bangalore"
+            },
+            {
+              "value": "Kolkata Knight Riders"
+            },
+            {
+              "value": "Chennai Super Kings"
+            }
+          ],
+          "valueSelectionStrategy": "ORIGINAL_VALUE"
+        }
+      ],
+      "voiceId": "0",
+      "childDirected": false,
+      "locale": "en-US",
+      "idleSessionTTLInSeconds": 600,
+      "clarificationPrompt": {
+        "messages": [
+          {
+            "contentType": "PlainText",
+            "content": "Sorry, can you please repeat that?"
+          }
+        ],
+        "maxAttempts": 5
+      },
+      "abortStatement": {
+        "messages": [
+          {
+            "contentType": "PlainText",
+            "content": "I don't think we are connectiong. So I will leave now. Bye..."
+          }
+        ]
+      },
+      "detectSentiment": true,
+      "enableModelImprovements": true
+    }
+  }

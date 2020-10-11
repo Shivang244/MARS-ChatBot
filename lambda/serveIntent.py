@@ -42,7 +42,7 @@ def athenaQueryHandler(queryString):
             'Database': 'ipl-dataset'
         },
         ResultConfiguration = {
-            'OutputLocation': 's3://vithack-dataset-result'
+            'OutputLocation': 's3://marsbot-dataset-result/'
         }
     )
 
